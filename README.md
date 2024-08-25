@@ -28,9 +28,7 @@ pip install -r requirements.txt
 ```
 
 3. Need to install *ripgrep*
-```
 Download and install 'ripgrep' from [GitHub Releases](https://github.com/BurntSushi/ripgrep/releases)
-```
 
 ## Usage
 1. Aswathama supports to detect technology and version for a single URL:
