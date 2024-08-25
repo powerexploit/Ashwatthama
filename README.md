@@ -5,7 +5,7 @@
 
 <h4 align="center">Most advanced tech and service detection suite.</h4>
 
-Aswathama is a command-line tool designed for service detection and version identification across multiple URLs. It leverages custom signatures to detect technologies and their versions from various sources like headers, content and cookies.
+Ashwatthama is a command-line tool designed for service detection and version identification across multiple URLs. It leverages custom signatures to detect technologies and their versions from various sources like headers, content and cookies.
 
 ## Features
 - Technology Detection: Identify various web technologies based on custom signatures.
@@ -30,19 +30,19 @@ pip install -r requirements.txt
 3. Download and install 'ripgrep' from [GitHub Releases](https://github.com/BurntSushi/ripgrep/releases)
 
 ## Usage
-1. Aswathama supports to detect technology and version for a single URL:
+1. Ashwatthama supports to detect technology and version for a single URL:
 ```
 python src/cli.py --url https://example.com
 ```
 
-2. Aswathama supports to detect technologies and versions for multiple URLs provided in a file:
+2. Ashwatthama supports to detect technologies and versions for multiple URLs provided in a file:
 ```
 python src/cli.py --url-list example.txt
 ```
 
 
 ## Custom Signatures
-One of the powerful features of Aswathama is its ability to be extended through custom signatures. Researchers can add their own signatures to detect new technologies or refine existing detections.
+One of the powerful features of Ashwatthama is its ability to be extended through custom signatures. Researchers can add their own signatures to detect new technologies or refine existing detections.
 
 ### Signature Template Format
 A signature is defined as a JSON object that contains the rules for detecting a specific technology and its version. Here's a quick guide to the format:
