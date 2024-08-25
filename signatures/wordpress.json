@@ -1,0 +1,12 @@
+{
+    "techName": "WordPress",
+    "discoveryRules": [
+      {
+        "path": "/wp-login.php",
+        "techRegex": "WordPress",
+        "versionRegex": "ver=([0-9.]+)",
+        "type": "content"
+      }
+    ]
+  }
+  

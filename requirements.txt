@@ -1,0 +1,7 @@
+requests
+pyyaml
+fake_useragent
+tenacity
+colorama
+art
+requests
