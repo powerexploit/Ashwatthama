@@ -8,44 +8,39 @@ from urllib.parse import urlparse
 from art import text2art
 from colorama import Fore, Style, init
 
-# Add the src directory to the Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from service_detection import ServiceDetection
-from utils.logs_handler import create_logger
+from utils.logs_handler import createLogger
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-logger = create_logger(__name__, remote_logging=False)
+logger = createLogger(__name__, remoteLogging=False)
 
-def validate_url(url):
-    """Validate URL format."""
+def validateUrl(url):
     try:
         result = urlparse(url)
         return all([result.scheme, result.netloc])
     except Exception:
         return False
 
-def colorize_json(json_obj):
-    """Colorize JSON output."""
-    json_str = json.dumps(json_obj, indent=4)
-    json_str = json_str.replace('"url":', f'{Fore.CYAN}"url":{Style.RESET_ALL}')
-    json_str = json_str.replace('"techname":', f'{Fore.GREEN}"techname":{Style.RESET_ALL}')
-    json_str = json_str.replace('"path":', f'{Fore.YELLOW}"path":{Style.RESET_ALL}')
-    json_str = json_str.replace('"type":', f'{Fore.MAGENTA}"type":{Style.RESET_ALL}')
-    return json_str
+def colorizeJson(jsonObj):
+    jsonStr = json.dumps(jsonObj, indent=4)
+    jsonStr = jsonStr.replace('"url":', f'{Fore.CYAN}"url":{Style.RESET_ALL}')
+    jsonStr = jsonStr.replace('"techname":', f'{Fore.GREEN}"techname":{Style.RESET_ALL}')
+    jsonStr = jsonStr.replace('"path":', f'{Fore.YELLOW}"path":{Style.RESET_ALL}')
+    jsonStr = jsonStr.replace('"type":', f'{Fore.MAGENTA}"type":{Style.RESET_ALL}')
+    return jsonStr
 
-def save_results_to_file(results, output_file):
-    """Save results to a file."""
+def saveResultsToFile(results, outputFile):
     try:
-        with open(output_file, 'w') as f:
+        with open(outputFile, 'w') as f:
             json.dump(results, f, indent=4)
-        logger.info(f"Results saved to {output_file}")
+        logger.info(f"Results saved to {outputFile}")
     except Exception as e:
         logger.error(f"Failed to save results to file: {e}")
 
-def print_progress(current, total, url):
-    """Print progress indicator."""
+def printProgress(current, total, url):
     percentage = (current / total) * 100
     print(f"\r{Fore.YELLOW}[{current}/{total}] ({percentage:.1f}%) Processing: {url}{Style.RESET_ALL}", end="", flush=True)
 
@@ -71,9 +66,7 @@ Examples:
     
     args = parser.parse_args()
 
-    # Initialize colorama after parsing arguments
     if args.no_color:
-        # Disable colorama
         init(autoreset=False)
         Fore.CYAN = Fore.GREEN = Fore.YELLOW = Fore.MAGENTA = Fore.RED = ""
         Style.RESET_ALL = ""
@@ -91,21 +84,16 @@ Examples:
         parser.print_help()
         sys.exit(1)
 
-    # Create ServiceDetection with CLI overrides
-    service_detection = ServiceDetection()
+    serviceDetection = ServiceDetection()
     
-    # Override timeout if provided via CLI
     if args.timeout:
-        service_detection.timeout = args.timeout
-        # Update the session timeout as well
-        for adapter in service_detection.session.adapters.values():
+        serviceDetection.timeout = args.timeout
+        for adapter in serviceDetection.session.adapters.values():
             if hasattr(adapter, 'config'):
                 adapter.config['timeout'] = args.timeout
     
-    # Override threading if provided via CLI
     if args.threads:
-        # Update the config loader's threading config
-        service_detection.config_loader.config['threading']['max_workers'] = args.threads
+        serviceDetection.configLoader.config['threading']['max_workers'] = args.threads
         logger.info(f"CLI override: Using {args.threads} threads")
     
     if args.timeout:
@@ -117,21 +105,21 @@ Examples:
     
     try:
         if args.url:
-            if not validate_url(args.url):
+            if not validateUrl(args.url):
                 print(f"{Fore.RED}Error: Invalid URL format: {args.url}{Style.RESET_ALL}")
                 sys.exit(1)
                 
             print(f"{Fore.CYAN}[*] Scanning: {args.url}{Style.RESET_ALL}")
-            results = service_detection.processResult(args.url)
+            results = serviceDetection.processResult(args.url)
             
             if results:
-                colored_results = colorize_json(results)
-                print(f"\n{colored_results}")
+                coloredResults = colorizeJson(results)
+                print(f"\n{coloredResults}")
             else:
                 print(f"{Fore.YELLOW}No technologies detected{Style.RESET_ALL}")
                 
             if args.output:
-                save_results_to_file(results, args.output)
+                saveResultsToFile(results, args.output)
 
         elif args.url_list:
             if not os.path.exists(args.url_list):
@@ -139,7 +127,7 @@ Examples:
                 sys.exit(1)
                 
             with open(args.url_list, 'r') as file:
-                urls = [line.strip() for line in file if line.strip() and validate_url(line.strip())]
+                urls = [line.strip() for line in file if line.strip() and validateUrl(line.strip())]
             
             if not urls:
                 print(f"{Fore.RED}Error: No valid URLs found in {args.url_list}{Style.RESET_ALL}")
@@ -147,27 +135,27 @@ Examples:
             
             print(f"{Fore.CYAN}[*] Found {len(urls)} valid URLs to scan{Style.RESET_ALL}")
             
-            all_results = []
+            allResults = []
             for i, url in enumerate(urls, 1):
                 if not args.no_color:
-                    print_progress(i, len(urls), url)
+                    printProgress(i, len(urls), url)
                 else:
                     print(f"[{i}/{len(urls)}] Processing: {url}")
                 
-                results = service_detection.processResult(url)
+                results = serviceDetection.processResult(url)
                 if results:
-                    all_results.append(results)
+                    allResults.append(results)
             
             print(f"\n{Fore.GREEN}[*] Scan completed{Style.RESET_ALL}")
             
-            if all_results:
-                colored_results = colorize_json(all_results)
-                print(f"\n{colored_results}")
+            if allResults:
+                coloredResults = colorizeJson(allResults)
+                print(f"\n{coloredResults}")
             else:
                 print(f"{Fore.YELLOW}No technologies detected across all URLs{Style.RESET_ALL}")
                 
             if args.output:
-                save_results_to_file(all_results, args.output)
+                saveResultsToFile(allResults, args.output)
 
     except KeyboardInterrupt:
         print(f"\n{Fore.YELLOW}[*] Scan interrupted by user{Style.RESET_ALL}")

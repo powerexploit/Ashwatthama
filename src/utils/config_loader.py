@@ -5,13 +5,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 class ConfigLoader:
-    def __init__(self, config_path="config.yaml"):
-        self.config_path = config_path
-        self.config = self.load_config()
+    def __init__(self, configPath="config.yaml"):
+        self.configPath = configPath
+        self.config = self.loadConfig()
     
-    def load_config(self):
-        """Load configuration from YAML file."""
-        default_config = {
+    def loadConfig(self):
+        defaultConfig = {
             "request": {
                 "timeout": 15,
                 "max_retries": 3,
@@ -42,41 +41,38 @@ class ConfigLoader:
             }
         }
         
-        if not os.path.exists(self.config_path):
-            logger.warning(f"Config file {self.config_path} not found, using defaults")
-            return default_config
+        if not os.path.exists(self.configPath):
+            logger.warning(f"Config file {self.configPath} not found, using defaults")
+            return defaultConfig
         
         try:
-            with open(self.config_path, 'r', encoding='utf-8') as file:
-                user_config = yaml.safe_load(file) or {}
+            with open(self.configPath, 'r', encoding='utf-8') as file:
+                userConfig = yaml.safe_load(file) or {}
             
-            # Merge user config with defaults
-            config = self._merge_configs(default_config, user_config)
-            logger.info(f"Configuration loaded from {self.config_path}")
+            config = self._mergeConfigs(defaultConfig, userConfig)
+            logger.info(f"Configuration loaded from {self.configPath}")
             return config
             
         except yaml.YAMLError as e:
             logger.error(f"Error parsing config file: {e}")
-            return default_config
+            return defaultConfig
         except Exception as e:
             logger.error(f"Error loading config file: {e}")
-            return default_config
+            return defaultConfig
     
-    def _merge_configs(self, default, user):
-        """Recursively merge user config with defaults."""
+    def _mergeConfigs(self, default, user):
         result = default.copy()
         
         for key, value in user.items():
             if key in result and isinstance(result[key], dict) and isinstance(value, dict):
-                result[key] = self._merge_configs(result[key], value)
+                result[key] = self._mergeConfigs(result[key], value)
             else:
                 result[key] = value
         
         return result
     
-    def get(self, key_path, default=None):
-        """Get configuration value using dot notation (e.g., 'request.timeout')."""
-        keys = key_path.split('.')
+    def get(self, keyPath, default=None):
+        keys = keyPath.split('.')
         value = self.config
         
         try:
@@ -86,22 +82,17 @@ class ConfigLoader:
         except (KeyError, TypeError):
             return default
     
-    def get_request_config(self):
-        """Get request configuration."""
+    def getRequestConfig(self):
         return self.config.get("request", {})
     
-    def get_threading_config(self):
-        """Get threading configuration."""
+    def getThreadingConfig(self):
         return self.config.get("threading", {})
     
-    def get_output_config(self):
-        """Get output configuration."""
+    def getOutputConfig(self):
         return self.config.get("output", {})
     
-    def get_signatures_config(self):
-        """Get signatures configuration."""
+    def getSignaturesConfig(self):
         return self.config.get("signatures", {})
     
-    def get_logging_config(self):
-        """Get logging configuration."""
+    def getLoggingConfig(self):
         return self.config.get("logging", {})
