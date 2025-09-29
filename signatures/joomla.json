@@ -1,0 +1,11 @@
+{
+    "techName": "Joomla",
+    "discoveryRules": [
+      {
+        "path": "/administrator/",
+        "techRegex": "Joomla!",
+        "versionRegex": "Joomla!\\s+(\\d+\\.\\d+\\.\\d+)",
+        "type": "content"
+      }
+    ]
+  }

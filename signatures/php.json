@@ -1,16 +1,22 @@
 {
-    "techName": "Php",
+    "techName": "PHP",
     "discoveryRules": [
         {
             "path": "/",
-            "techRegex": "PHP",
+            "techRegex": "phpMyAdmin",
             "versionRegex": "phpMyAdmin\\s+(\\d+\\.\\d+\\.\\d+)",
             "type": "content"
         },
         {
             "path": "/",
             "techRegex": "PHP",
-            "versionRegex": "PHP/(\\d+\\.\\d+\\.\\d+)",
+            "versionRegex": "PHP/(\\d+\\.\\d+(?:\\.\\d+)?)",
+            "type": "header"
+        },
+        {
+            "path": "/",
+            "techRegex": "X-Powered-By.*PHP",
+            "versionRegex": "PHP/(\\d+\\.\\d+(?:\\.\\d+)?)",
             "type": "header"
         }
     ]

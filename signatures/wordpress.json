@@ -1,12 +1,78 @@
 {
     "techName": "WordPress",
     "discoveryRules": [
-      {
-        "path": "/wp-login.php",
-        "techRegex": "WordPress",
-        "versionRegex": "ver=([0-9.]+)",
-        "type": "content"
-      }
+        {
+            "path": "/",
+            "techRegex": "<generator>https?:\\/\\/wordpress\\.org.*<\\/generator>",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/wp-admin/install.php",
+            "techRegex": "WordPress",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/feed/",
+            "techRegex": "<generator>https?:\\/\\/wordpress\\.org.*<\\/generator>",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/?feed=rss2",
+            "techRegex": "<generator>https?:\\/\\/wordpress\\.org.*<\\/generator>",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "wp-login\\.php",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "name=\"generator\" content=\"wordpress",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "<link[^>]+s\\d+\\.wp\\.com",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "<!-- This site is optimized with the Yoast (?:WordPress )?SEO plugin",
+            "versionRegex": "<!-- This site is optimized with the Yoast (?:WordPress )?SEO plugin v([\\d.]+) -",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "<!--[^>]+WP-Super-Cache",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "/wp-content/uploads/",
+            "versionRegex": "wordpress\\.org\\/\\?v=([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "wp-emoji-release\\.min\\.js",
+            "versionRegex": "wp-emoji-release\\.min\\.js\\?ver=((\\d+\\.?)+)\\b",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "install\\.min\\.css",
+            "versionRegex": "install\\.min\\.css\\?ver=((\\d+\\.?)+)\\b",
+            "type": "content"
+        }
     ]
-  }
+}
   

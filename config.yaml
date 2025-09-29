@@ -1,0 +1,34 @@
+# Ashwatthama Configuration File
+
+# Request settings
+request:
+  timeout: 15
+  max_retries: 3
+  user_agent_rotation: true
+  follow_redirects: true
+  verify_ssl: false
+
+# Threading settings
+threading:
+  max_workers: 10
+  thread_timeout: 30
+
+# Output settings
+output:
+  default_format: "json"
+  colorize: true
+  verbose: false
+  save_logs: true
+
+# Signature settings
+signatures:
+  auto_reload: false
+  validation: true
+  cache_enabled: true
+
+# Logging settings
+logging:
+  level: "INFO"
+  file_rotation: true
+  max_file_size_mb: 10
+  backup_count: 5

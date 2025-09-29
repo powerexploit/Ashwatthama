@@ -1,0 +1,23 @@
+{
+    "techName": "Django",
+    "discoveryRules": [
+        {
+            "path": "/",
+            "techRegex": "Django",
+            "versionRegex": "Django/([0-9.]+)",
+            "type": "header"
+        },
+        {
+            "path": "/",
+            "techRegex": "X-Frame-Options.*DENY",
+            "versionRegex": "Django/([0-9.]+)",
+            "type": "header"
+        },
+        {
+            "path": "/",
+            "techRegex": "csrftoken",
+            "versionRegex": "csrftoken",
+            "type": "cookies"
+        }
+    ]
+}

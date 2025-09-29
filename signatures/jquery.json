@@ -1,0 +1,17 @@
+{
+    "techName": "jQuery",
+    "discoveryRules": [
+        {
+            "type": "content",
+            "path": "/",
+            "techRegex": "jQuery",
+            "versionRegex": "jQuery(?: JavaScript Library)? v?(\\d+\\.\\d+\\.\\d+)"
+        },
+        {
+            "type": "content",
+            "path": "/",
+            "techRegex": "jquery.min.js",
+            "versionRegex": "jquery-(\\d+\\.\\d+\\.\\d+).min.js"
+        }
+    ]
+}

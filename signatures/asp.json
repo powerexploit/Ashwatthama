@@ -1,0 +1,17 @@
+{
+    "techName": "ASP.NET",
+    "discoveryRules": [
+      {
+        "path": "/",
+        "techRegex": "ASP.NET",
+        "versionRegex": "ASP.NET\\s+(\\d+\\.\\d+)",
+        "type": "content"
+      },
+      {
+        "path": "/",
+        "techRegex": "X-Powered-By: ASP.NET",
+        "versionRegex": "ASP.NET\\s+(\\d+\\.\\d+)",
+        "type": "header"
+      }
+    ]
+  }

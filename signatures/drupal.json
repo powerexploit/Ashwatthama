@@ -1,0 +1,11 @@
+{
+    "techName": "Drupal",
+    "discoveryRules": [
+        {
+            "type": "content",
+            "path": "/CHANGELOG.txt",
+            "techRegex": "Drupal",
+            "versionRegex": "Drupal\\s+(\\d+\\.\\d+)"
+        }
+    ]
+}

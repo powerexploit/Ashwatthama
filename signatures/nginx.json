@@ -1,0 +1,17 @@
+{
+    "techName": "Nginx",
+    "discoveryRules": [
+      {
+        "path": "/",
+        "techRegex": "nginx",
+        "versionRegex": "nginx/(\\d+\\.\\d+\\.\\d+)",
+        "type": "header"
+      },
+      {
+        "path": "/",
+        "techRegex": "Server: nginx",
+        "versionRegex": "nginx/(\\d+\\.\\d+\\.\\d+)",
+        "type": "header"
+      }
+    ]
+  }

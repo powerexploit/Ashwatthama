@@ -1,0 +1,23 @@
+{
+    "techName": "Ruby on Rails",
+    "discoveryRules": [
+        {
+            "path": "/",
+            "techRegex": "Ruby on Rails",
+            "versionRegex": "Ruby on Rails ([0-9.]+)",
+            "type": "content"
+        },
+        {
+            "path": "/",
+            "techRegex": "X-Runtime",
+            "versionRegex": "X-Runtime: ([0-9.]+)",
+            "type": "header"
+        },
+        {
+            "path": "/",
+            "techRegex": "_rails_session",
+            "versionRegex": "_rails_session",
+            "type": "cookies"
+        }
+    ]
+}

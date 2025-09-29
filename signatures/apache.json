@@ -1,0 +1,17 @@
+{
+    "techName": "Apache",
+    "discoveryRules": [
+      {
+        "path": "/",
+        "techRegex": "Apache",
+        "versionRegex": "Apache/(\\d+\\.\\d+\\.\\d+)",
+        "type": "header"
+      },
+      {
+        "path": "/",
+        "techRegex": "Server: Apache",
+        "versionRegex": "Apache/(\\d+\\.\\d+\\.\\d+)",
+        "type": "header"
+      }
+    ]
+  }

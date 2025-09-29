@@ -1,0 +1,17 @@
+{
+    "techName": "React",
+    "discoveryRules": [
+        {
+            "type": "content",
+            "path": "/",
+            "techRegex": "React",
+            "versionRegex": "react-(\\d+\\.\\d+\\.\\d+).js"
+        },
+        {
+            "type": "content",
+            "path": "/",
+            "techRegex": "data-reactroot",
+            "versionRegex": ""
+        }
+    ]
+}

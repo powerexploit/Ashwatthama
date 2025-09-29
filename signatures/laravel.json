@@ -1,0 +1,17 @@
+{
+    "techName": "Laravel",
+    "discoveryRules": [
+        {
+            "type": "header",
+            "path": "/",
+            "techRegex": "X-Powered-By: Laravel",
+            "versionRegex": "Laravel/(\\d+\\.\\d+\\.\\d+)"
+        },
+        {
+            "type": "content",
+            "path": "/",
+            "techRegex": "Laravel",
+            "versionRegex": "Laravel Framework (\\d+\\.\\d+\\.\\d+)"
+        }
+    ]
+}
